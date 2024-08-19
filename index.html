@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,37 +8,55 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-             background-image: url(./img/teclado.jpg);
+            background-image: url(./img/teclado.jpg);
+            background-repeat: no-repeat;
             background-size: cover;
             background-position: center center;
             background-attachment: fixed;
             opacity: 0.7;
-            background: no-repeat;
             margin: 0;
             padding: 0;
         }
+
         .gerador {
+            position: relative;
             max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             margin: auto;
             padding: 20px;
-            margin-top: 40%;
-            text-align: center;
-            border: 1px solid #ddd;
+            margin-top: 10%;
+            margin-bottom: 10%;
+            border: 1px solid white;
             border-radius: 10px;
-            background-color: rgb(0, 0, 0, 0.5);
+
         }
+
         .gerador h1 {
-            background: rgb(32, 32, 241);
+            background: rgb(4, 4, 240);
             border-radius: 10px;
             border: rgb(1, 1, 39) solid 2px;
-            color: #031224;
+            color: #000000;
         }
-        input, button {
+
+        input,
+        button {
             margin: 10px 0;
             padding: 10px;
             font-size: 16px;
             border-radius: 10px;
         }
+
+        label {
+            color: white;
+        }
+
+        .box {
+            align-items: center;
+        }
+
         button {
             background-color: #007bff;
             color: white;
@@ -45,34 +64,73 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         button:hover {
-            background-color: #0056b3;
+            background-color: #031e3a;
         }
+        @media (min-width: 700px) {
+  .gerador {
+    max-width: 50%;
+    margin-top: 20%;
+  }
+  input, button {
+    font-size: 18px;
+  }
+  label{
+    font-size: 18px;
+  }
+  #resultado {
+    width: 300px;
+    height: 30px;
+    margin-left: 0;
+  }
+  h4 {
+    margin-top: -60px;
+    margin-bottom: 60px;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
+  }
+}
     </style>
 </head>
+
 <body>
-    <img src=".img/teclado.jpg">
     <div class="gerador">
         <h1>Gerador de Senha</h1>
         <label for="comprimento">Quantidade da Senha:</label>
         <input type="number" id="comprimento" min="1" placeholder="Digite a quantidade" style="text-align: center;" />
-        <div>
-            <label>
-                <input type="checkbox" id="incluirNumeros" />
-                Incluir Números
-            </label>
+        <div class="box">
+            <input type="checkbox" id="incluirNumeros">
+            <label>Incluir Números</label>
             <br />
-            <label>
-                <input type="checkbox" id="incluirSimbolos" />
-                Incluir Símbolos
-            </label>
+            <input type="checkbox" id="incluirSimbolos">
+            <label>Incluir Símbolos</label>
             <br />
             <button onclick="gerarSenha()">Gerar</button>
             <button onclick="copiarSenha()">Copiar</button>
-            <div id="resultado" style="background-color: white; border-radius: 10px; padding: 10px; margin: 10px 0; width: 219px; height: 22px; margin-left: 40px; margin-top: 30px;"></div>
-            <h4 style="margin-top: -80px; margin-bottom: 48px;">Sua senha:</h4>
+        </div>
+        <div id="resultado" 
+        style="background-color: white; border-radius: 10px; padding: 10px; margin: 10px 0px; width: 219px; height: 22px; margin-top: 30px;">
+        <h4 style="margin-top: -20%; margin-left: 30%; color:white;">Sua senha:</h4>
         </div>
     </div>
+    <footer></footer>
     <script>
         function gerarSenha() {
             const comprimento = parseInt(document.getElementById('comprimento').value);
@@ -120,4 +178,5 @@
         }
     </script>
 </body>
+
 </html>
