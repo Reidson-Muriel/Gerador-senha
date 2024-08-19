@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senha</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url(/img/teclado.jpg);
+            background: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        .gerador {
+            max-width: 300px;
+            margin: auto;
+            padding: 20px;
+            margin-top: 40%;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: rgb(0, 0, 0, 0.5);
+        }
+        .gerador h1 {
+            background: rgb(32, 32, 241);
+            border-radius: 10px;
+            border: rgb(1, 1, 39) solid 2px;
+            color: #031224;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="gerador">
+        <h1>Gerador de Senha</h1>
+        <label for="comprimento">Quantidade da Senha:</label>
+        <input type="number" id="comprimento" min="1" placeholder="Digite a quantidade" style="text-align: center;" />
+        <div>
+            <label>
+                <input type="checkbox" id="incluirNumeros" />
+                Incluir Números
+            </label>
+            <br />
+            <label>
+                <input type="checkbox" id="incluirSimbolos" />
+                Incluir Símbolos
+            </label>
+            <br />
+            <button onclick="gerarSenha()">Gerar</button>
+            <button onclick="copiarSenha()">Copiar</button>
+            <div id="resultado" style="background-color: white; border-radius: 10px; padding: 10px; margin: 10px 0; width: 219px; height: 22px; margin-left: 40px; margin-top: 30px;"></div>
+            <h4 style="margin-top: -80px; margin-bottom: 48px;">Sua senha:</h4>
+        </div>
+    </div>
+    <script>
+        function gerarSenha() {
+            const comprimento = parseInt(document.getElementById('comprimento').value);
+            if (isNaN(comprimento) || comprimento <= 0) {
+                alert("Comprimento inválido!");
+                return;
+            }
+
+            const incluirNumeros = document.getElementById('incluirNumeros').checked;
+            const incluirSimbolos = document.getElementById('incluirSimbolos').checked;
+
+            let caracteres = "abcdefghijklnmpqrstuvwxzABCDEFGHIJKLNMPQRSTUVWXZ";
+            let numeros = "123456789";
+            let simbolos = "!@#$%^&*()_+-=[]{}|;':\"<>,.?/";
+
+            if (incluirNumeros) {
+                caracteres += numeros;
+            }
+
+            if (incluirSimbolos) {
+                caracteres += simbolos;
+            }
+
+            let senha = "";
+
+            for (let i = 0; i < comprimento; i++) {
+                let indice = Math.floor(Math.random() * caracteres.length);
+                senha += caracteres[indice];
+            }
+
+            document.getElementById('resultado').textContent = senha;
+        }
+
+        function copiarSenha() {
+            const resultado = document.getElementById('resultado').textContent;
+            if (resultado) {
+                navigator.clipboard.writeText(resultado).then(() => {
+                    alert('Senha copiada para a área de transferência!');
+                }).catch(err => {
+                    alert('Erro ao copiar a senha: ', err);
+                });
+            } else {
+                alert('Nenhuma senha gerada para copiar.');
+            }
+        }
+    </script>
+</body>
+</html>
