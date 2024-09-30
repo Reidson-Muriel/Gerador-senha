@@ -114,7 +114,7 @@
     <div class="gerador">
         <h1>Gerador de Senha</h1>
         <label for="comprimento">Quantidade da Senha:</label>
-        <input type="number" id="comprimento" min="1" placeholder="Digite a quantidade" style="text-align: center;" />
+        <input type="number" id="comprimento" min="1" placeholder="Digite de 1 a 20" style="text-align: center;" />
         <div class="box">
             <input type="checkbox" id="incluirNumeros">
             <label>Incluir Números</label>
@@ -134,7 +134,7 @@
     <script>
         function gerarSenha() {
             const comprimento = parseInt(document.getElementById('comprimento').value);
-            if (isNaN(comprimento) || comprimento <= 0) {
+            if (isNaN(comprimento) || comprimento > 20) {
                 alert("Comprimento inválido!");
                 return;
             }
